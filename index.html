@@ -417,7 +417,7 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
         <blockquote class="review rv" style="transition-delay:.12s"><p>Really good service, very precise and quality job hanging pictures, very friendly and enjoyable to have in the house.&rdquo;</p><footer>Poppy D &middot; Hemel Hempstead, HP3</footer></blockquote>
         <blockquote class="review rv" style="transition-delay:.18s"><p>I booked Watford Handyman to put a long mirror back on a wall together with a couple of shelves and an additional shelf in a wardrobe. All completed successfully, did very well considering it&rsquo;s a Victorian property. Arrived on time and cleared up afterwards. Would certainly book again.&rdquo;</p><footer>Sandra Kay &middot; via Trustpilot</footer></blockquote>
         <blockquote class="review rv" style="transition-delay:.24s"><p>I moved into a house last year needing a fair bit of work and I have relied on the handyman services for much of this. Putting up blinds, securing fencing and garden door, patio paving, the list goes on. Also give friendly advice. I wholeheartedly recommend.&rdquo;</p><footer>W of London &middot; via Trustpilot</footer></blockquote>
-        <div class="review tp rv" style="transition-delay:.3s" id="tp-card">
+        <div class="review tp rv fallback" style="transition-delay:.3s" id="tp-card" data-note="remove the fallback class once TrustBox is enabled in Trustpilot Business; the widget then loads and shows the live score">
           <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="689d95ddc64a551852d8fffa" data-style-height="150px" data-style-width="100%" data-theme="dark"><a href="https://uk.trustpilot.com/review/watfordhandyman.uk" target="_blank" rel="noopener">Trustpilot</a></div>
           <div class="tp-static"><p class="tp-score"><b>4.7</b> <span>Excellent</span></p><p class="tp-stars" aria-label="4.7 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="tp-body">40 reviews on Trustpilot.</p></div>
           <footer><a href="https://uk.trustpilot.com/review/watfordhandyman.uk" target="_blank" rel="noopener">Read all our reviews on Trustpilot &rarr;</a></footer>
@@ -727,9 +727,8 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
   });
 })();
 </script>
-<script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 <script>
-(function(){var c=document.getElementById('tp-card');if(!c)return;setTimeout(function(){if(!c.querySelector('.trustpilot-widget iframe'))c.classList.add('fallback')},5000)})();
+(function(){var c=document.getElementById('tp-card');if(!c||c.classList.contains('fallback'))return;var s=document.createElement('script');s.src='https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';s.async=true;document.head.appendChild(s);setTimeout(function(){if(!c.querySelector('.trustpilot-widget iframe'))c.classList.add('fallback')},6000)})();
 (function(){var boxes=Array.prototype.slice.call(document.querySelectorAll('[data-cmp]'));if(!boxes.length)return;
 function set(b,v){b.style.setProperty('--p',v+'%')}
 boxes.forEach(function(b){var r=b.querySelector('.cmp-range');set(b,r.value);r.addEventListener('input',function(){b.dataset.touched='1';set(b,r.value)})});
