@@ -302,7 +302,7 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
 .review.tp .tp-score{font-family:var(--font);font-style:normal;font-weight:800;font-variation-settings:"wdth" 116;font-size:2.6rem;line-height:1;letter-spacing:-.02em}.review.tp .tp-score span{font-size:1rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-left:.4rem;color:var(--bone-dim)}
 .review.tp .tp-stars{font-family:var(--font);font-style:normal;color:#00b67a;font-size:1.35rem;letter-spacing:.12em;line-height:1}
 .review.tp .tp-body{font-family:var(--font);font-style:normal;font-weight:400;font-size:.95rem;color:var(--bone-dim)}
-.review.tp footer{color:var(--orange)}.review.tp p::before,.review.tp p::after{content:none}
+.review.tp footer{color:var(--orange)}.review.tp footer a{color:inherit;text-decoration:none}.review.tp footer a:hover{text-decoration:underline}.review.tp .tp-static{display:none}.review.tp.fallback .tp-static{display:block}.review.tp.fallback .trustpilot-widget{display:none}.review.tp .trustpilot-widget{min-height:150px}.review.tp p::before,.review.tp p::after{content:none}
 </style>
 </head>
 <body>
@@ -417,7 +417,11 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
         <blockquote class="review rv" style="transition-delay:.12s"><p>Really good service, very precise and quality job hanging pictures, very friendly and enjoyable to have in the house.&rdquo;</p><footer>Poppy D &middot; Hemel Hempstead, HP3</footer></blockquote>
         <blockquote class="review rv" style="transition-delay:.18s"><p>I booked Watford Handyman to put a long mirror back on a wall together with a couple of shelves and an additional shelf in a wardrobe. All completed successfully, did very well considering it&rsquo;s a Victorian property. Arrived on time and cleared up afterwards. Would certainly book again.&rdquo;</p><footer>Sandra Kay &middot; via Trustpilot</footer></blockquote>
         <blockquote class="review rv" style="transition-delay:.24s"><p>I moved into a house last year needing a fair bit of work and I have relied on the handyman services for much of this. Putting up blinds, securing fencing and garden door, patio paving, the list goes on. Also give friendly advice. I wholeheartedly recommend.&rdquo;</p><footer>W of London &middot; via Trustpilot</footer></blockquote>
-        <a class="review tp rv" style="transition-delay:.3s" href="https://uk.trustpilot.com/review/watfordhandyman.uk" target="_blank" rel="noopener"><p class="tp-score"><b>4.7</b> <span>Excellent</span></p><p class="tp-stars" aria-label="4.7 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="tp-body">40 reviews on Trustpilot. Read every one of them.</p><footer>Read our reviews on Trustpilot &rarr;</footer></a>
+        <div class="review tp rv" style="transition-delay:.3s" id="tp-card">
+          <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="689d95ddc64a551852d8fffa" data-style-height="150px" data-style-width="100%" data-theme="dark"><a href="https://uk.trustpilot.com/review/watfordhandyman.uk" target="_blank" rel="noopener">Trustpilot</a></div>
+          <div class="tp-static"><p class="tp-score"><b>4.7</b> <span>Excellent</span></p><p class="tp-stars" aria-label="4.7 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="tp-body">40 reviews on Trustpilot.</p></div>
+          <footer><a href="https://uk.trustpilot.com/review/watfordhandyman.uk" target="_blank" rel="noopener">Read all our reviews on Trustpilot &rarr;</a></footer>
+        </div>
       </div>
       <p class="reviews-src rv">Customer feedback from our customers and from Trustpilot, where Watford Handyman is rated 4.7 out of 5.</p>
     </div>
@@ -625,7 +629,7 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
         <div><h3>Who sees it</h3><p>The family who run the business. Form submissions are delivered to our inbox by a form-processing service acting on our instructions. We never sell or share your details for marketing.</p></div>
         <div><h3>How long we keep it</h3><p>Enquiries that do not become a booking are deleted within 6 months. Records of completed work are kept for 6 years for tax and warranty purposes.</p></div>
         <div><h3>Your rights</h3><p>You can ask to see, correct or delete your data at any time by emailing enquiries@watfordhandyman.uk. You also have the right to complain to the ICO (ico.org.uk).</p></div>
-        <div><h3>Cookies</h3><p>This site sets no tracking or advertising cookies. Fonts and photographs are loaded from Google Fonts and Unsplash, which may see your IP address when they serve those files.</p></div>
+        <div><h3>Cookies</h3><p>This site sets no tracking or advertising cookies. Fonts and some photographs are loaded from Google Fonts and Unsplash, and the live review score is loaded from Trustpilot; each may see your IP address when it serves those files.</p></div>
         <div><h3>Changes</h3><p>If this policy changes, the new version will appear on this page with a fresh date.</p></div>
       </div>
       <p class="privacy-meta">Policy dated September 2026.</p>
@@ -723,7 +727,9 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
   });
 })();
 </script>
+<script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 <script>
+(function(){var c=document.getElementById('tp-card');if(!c)return;setTimeout(function(){if(!c.querySelector('.trustpilot-widget iframe'))c.classList.add('fallback')},5000)})();
 (function(){var boxes=Array.prototype.slice.call(document.querySelectorAll('[data-cmp]'));if(!boxes.length)return;
 function set(b,v){b.style.setProperty('--p',v+'%')}
 boxes.forEach(function(b){var r=b.querySelector('.cmp-range');set(b,r.value);r.addEventListener('input',function(){b.dataset.touched='1';set(b,r.value)})});
