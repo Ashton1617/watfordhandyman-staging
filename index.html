@@ -325,7 +325,7 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
     <svg class="bigtick" viewBox="0 0 200 160" aria-hidden="true"><path d="M22 86 L78 138 L182 22"/></svg>
     <div class="wrap hero-in">
       <p class="rule">Family-run · Central Watford · since 2005</p>
-      <h1 class="display" id="hero-h"><span class="w"><span>No</span></span> <span class="w"><span>job</span></span> <span class="w"><span>too</span></span> <span class="w"><span>small.</span></span><span class="it">&ldquo;The professional alternative to DIY.&rdquo;</span></h1>
+      <h1 class="display" id="hero-h"><span class="w"><span>No</span></span> <span class="w"><span>job</span></span> <span class="w"><span>too</span></span> <span class="w"><span>small.</span></span><span class="it">&ldquo;The professional alternative <span class="to">to</span> DIY.&rdquo;</span></h1>
       <div class="hero-row"><div class="hero-copy">
       <p class="lede">Fixing to walls, painting and decorating, flat-pack assembly, minor electrical and the odd jobs in between. Send us your list; we come back with a time and a price.</p>
       <p class="cta"><a class="btn btn-bone" href="#book"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Book a handyman</a><a class="btn btn-ghost" href="#services">See what we charge</a></p>
@@ -745,7 +745,9 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
 (function(){var aw=document.querySelector('.hero-award'),tp=document.querySelector('.hero-tp'),img=document.querySelector('.hero-award img'),inn=document.querySelector('.hero-in'),h1=document.querySelector('.hero h1'),ws=document.querySelectorAll('.hero h1 .w');if(!aw||!tp||!img||!inn||!h1||ws.length<3)return;
 var rem=parseFloat(getComputedStyle(document.documentElement).fontSize);
 function place(){['--tp-top','--tp-left','--tp-width'].forEach(function(v){tp.style.removeProperty(v)});h1.style.removeProperty('max-width');if(innerWidth<=1180)return;
-  var innR=inn.getBoundingClientRect(),awR=aw.getBoundingClientRect();h1.style.maxWidth=Math.floor(awR.left-innR.left-2*rem)+'px';
+  aw.style.removeProperty('margin-right');var innR=inn.getBoundingClientRect(),to=document.querySelector('.hero h1 .to');
+  for(var i=0;i<2;i++){var ir0=img.getBoundingClientRect();if(to){var d=ir0.left-to.getBoundingClientRect().left;var mr=parseFloat(getComputedStyle(aw).marginRight)||0;aw.style.marginRight=Math.max(0,Math.round(mr+d))+'px'}}
+  var awR=aw.getBoundingClientRect();h1.style.maxWidth=Math.floor(awR.left-innR.left-2*rem)+'px';
   var ir=img.getBoundingClientRect(),tooT=ws[2].getBoundingClientRect().top;
   tp.style.setProperty('--tp-top',Math.round(tooT-innR.top)+'px');tp.style.setProperty('--tp-left',Math.round(ir.left-innR.left)+'px');tp.style.setProperty('--tp-width',Math.round(ir.width)+'px')}
 place();addEventListener('resize',place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);addEventListener('load',place)})();
