@@ -724,7 +724,7 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
 </script>
 <script>
 /* Booking form: client-side validation so nothing half-filled reaches the inbox.
-   On success the browser submits normally to FormSubmit — no fake thank-you. */
+   On success it posts to FormSubmit's AJAX endpoint, then goes to /thanks/ — no fake thank-you. */
 (function(){
   var form=document.getElementById('form');if(!form)return;
   var summary=document.getElementById('summary');
@@ -747,8 +747,18 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
   form.addEventListener('submit',function(e){
     var bad=[];fields.forEach(function(el){if(!mark(el,problem(el)))bad.push(el)});
     if(bad.length){e.preventDefault();summary.textContent=bad.length===1?'One field needs a moment before this can be sent.':bad.length+' fields need a moment before this can be sent.';summary.hidden=false;bad[0].focus();return}
-    summary.hidden=true;
-    var btn=form.querySelector('.submit');btn.disabled=true;btn.textContent='Sending…';
+    e.preventDefault();summary.hidden=true;
+    var btn=form.querySelector('.submit'),label=btn.textContent;btn.disabled=true;btn.textContent='Sending…';
+    var data=new FormData(form),inbox=form.action.split('/').pop();
+    fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',body:data,headers:{Accept:'application/json'}})
+      .then(function(r){if(!r.ok)throw r.status;location.href=data.get('_next')})
+      .catch(function(){
+        // FormSubmit down (it was, 30 Oct 2026): never lose the booking, hand it to the visitor's email app.
+        var body='';data.forEach(function(v,k){if(k.charAt(0)!=='_'&&v)body+=k.replace('_',' ')+': '+v+'\n'});
+        location.href='mailto:'+inbox+'?subject='+encodeURIComponent(data.get('_subject')||'Booking')+'&body='+encodeURIComponent(body);
+        summary.textContent='Our booking form couldn’t send just now, so your email app has opened with your list filled in. Press send and it’s with us, or email '+inbox+'.';summary.hidden=false;
+        btn.disabled=false;btn.textContent=label;
+      });
   });
 })();
 </script>
