@@ -724,7 +724,7 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
 </script>
 <script>
 /* Booking form: client-side validation so nothing half-filled reaches the inbox.
-   On success it posts to FormSubmit's AJAX endpoint, then goes to /thanks/ — no fake thank-you. */
+   On success it posts to the Apps Script backend, then goes to /thanks/ — no fake thank-you. */
 (function(){
   var form=document.getElementById('form');if(!form)return;
   var summary=document.getElementById('summary');
@@ -750,8 +750,10 @@ html.still .hero h1 .w span,html.still .hero h1 .it,html.still .hero .cta,html.s
     e.preventDefault();summary.hidden=true;
     var btn=form.querySelector('.submit'),label=btn.textContent;btn.disabled=true;btn.textContent='Sending…';
     var data=new FormData(form),inbox=form.action.split('/').pop();
-    fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',body:data,headers:{Accept:'application/json'}})
-      .then(function(r){if(!r.ok)throw r.status;location.href=data.get('_next')})
+    // Google Apps Script under james@ashtonstudios.uk mails the booking to Dennis (source: data/clients/watford-handyman/form-backend.gs).
+    fetch('https://script.google.com/macros/s/AKfycbxalN3UkC2Hc582lR_qZliovHtFlZZ8KgM0jXDAkGKi4QFsYll7dKeQqTfvwVFb7-ur/exec',{method:'POST',body:data})
+      .then(function(r){return r.json()})
+      .then(function(j){if(!j.ok)throw j.error;location.href=data.get('_next')})
       .catch(function(){
         // FormSubmit down (it was, 30 Oct 2026): never lose the booking, hand it to the visitor's email app.
         var body='';data.forEach(function(v,k){if(k.charAt(0)!=='_'&&v)body+=k.replace('_',' ')+': '+v+'\n'});
