@@ -172,6 +172,9 @@ p.lede{font-size:clamp(1.05rem,1rem + .45vw,1.35rem);line-height:1.45;max-width:
 .tv-rates thead th{border-top:0;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--navy);vertical-align:bottom}
 .tv-rates thead small{display:block;font-size:.85em;letter-spacing:.04em;text-transform:none;font-weight:500;color:var(--dim)}
 .tv-rates td{font-variation-settings:"wdth" 116;font-weight:800;font-size:1.05rem;letter-spacing:-.02em}
+.card.tag{height:auto;min-height:clamp(27rem,58vh,33rem)}
+/* short laptop screens: the two rate panels must fit the pinned row without clipping */
+@media(min-width:901px) and (max-height:760px){.card.tag{padding:1.1rem 1.3rem}.card.tag h3{font-size:1.45rem}.card.tag .rates li{padding:.32rem 0}.tv-rates th,.tv-rates td{padding:.22rem 0}.card.tag small{font-size:.7rem;line-height:1.35}}
 @media(max-width:900px){.svc-stage{height:auto!important}.svc-pin{position:static;height:auto;padding:clamp(5rem,12vh,8rem) 0}.svc-track{flex-direction:column;padding:0 4vw;transform:none!important}.card,.card.tag{width:100%;height:auto;min-height:24rem}.card.tag{min-height:0}.svc-head{flex-direction:column;align-items:start}}
 
 /* WHY US */
